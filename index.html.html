@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Sakthi Sri - Portfolio Website" />
+  <title>Sakthi Sri | Portfolio</title>
+
+  <style>
+    /* RESET */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Segoe UI', sans-serif;
+    }
+
+    body {
+      background: #f5f7fa;
+      color: #333;
+      line-height: 1.6;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    /* HEADER */
+    header {
+      background: #0f172a;
+      color: #fff;
+      padding: 1rem 2rem;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    nav h1 {
+      font-size: 1.5rem;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 1.5rem;
+    }
+
+    nav a {
+      color: #e2e8f0;
+      font-weight: 500;
+    }
+
+    nav a:hover,
+    nav a:focus {
+      color: #38bdf8;
+    }
+
+    /* MAIN */
+    main {
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    section {
+      margin-bottom: 3rem;
+    }
+
+    h2 {
+      color: #0f172a;
+      margin-bottom: 1rem;
+      border-left: 4px solid #38bdf8;
+      padding-left: 10px;
+    }
+
+    /* CARD STYLE */
+    .card {
+      background: #fff;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+      transition: transform 0.2s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-5px);
+    }
+
+    /* PROJECT GRID */
+    .projects {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 1.5rem;
+    }
+
+    /* FORM */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input, textarea {
+      padding: 0.7rem;
+      border-radius: 6px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+
+    input:focus, textarea:focus {
+      outline: 2px solid #38bdf8;
+      border-color: transparent;
+    }
+
+    button {
+      background: #38bdf8;
+      color: white;
+      padding: 0.8rem;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    button:hover {
+      background: #0284c7;
+    }
+
+    /* FOOTER */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background: #0f172a;
+      color: #cbd5f5;
+      margin-top: 2rem;
+    }
+
+    /* ACCESSIBILITY */
+    :focus {
+      outline: 2px dashed #38bdf8;
+      outline-offset: 3px;
+    }
+
+    /* RESPONSIVE */
+    @media (max-width: 600px) {
+      nav ul {
+        flex-direction: column;
+        gap: 0.5rem;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <nav aria-label="Main Navigation">
+      <h1>Sakthi Sri</h1>
+      <ul>
+        <li><a href="#about">About</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- MAIN -->
+  <main>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <h2>About Me</h2>
+      <div class="card">
+        <p>
+          I am a Computer Science student passionate about web development,
+          problem-solving, and building accessible web applications.
+        </p>
+      </div>
+    </section>
+
+    <!-- PROJECTS -->
+    <section id="projects">
+      <h2>Projects</h2>
+      <div class="projects">
+
+        <article class="card">
+          <h3>Portfolio Website</h3>
+          <p>Semantic HTML5 portfolio with accessibility features.</p>
+        </article>
+
+        <article class="card">
+          <h3>Java Mini Project</h3>
+          <p>Console-based application demonstrating OOP concepts.</p>
+        </article>
+
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+      <h2>Contact Me</h2>
+
+      <form aria-label="Contact Form">
+        <div>
+          <label for="name">Name</label>
+          <input id="name" type="text" required />
+        </div>
+
+        <div>
+          <label for="email">Email</label>
+          <input id="email" type="email" required />
+        </div>
+
+        <div>
+          <label for="message">Message</label>
+          <textarea id="message" rows="4" required></textarea>
+        </div>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Sakthi Sri. All rights reserved.</p>
+  </footer>
+
+</body>
+</html>
