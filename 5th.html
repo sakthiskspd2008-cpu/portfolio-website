@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <title>E-Commerce Product Catalog</title>
+
+  <!-- GOOGLE FONT -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <!-- ICONS -->
+  <link rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"/>
+
+  <style>
+
+    *{
+      margin:0;
+      padding:0;
+      box-sizing:border-box;
+      font-family:'Poppins',sans-serif;
+    }
+
+    html{
+      scroll-behavior:smooth;
+    }
+
+    body{
+      background:#0f172a;
+      color:white;
+      overflow-x:hidden;
+    }
+
+    /* =========================
+       NAVBAR
+    ========================== */
+
+    nav{
+      width:100%;
+      background:rgba(15,23,42,0.95);
+      backdrop-filter:blur(10px);
+      position:sticky;
+      top:0;
+      z-index:1000;
+      border-bottom:1px solid rgba(255,255,255,0.08);
+    }
+
+    .nav-container{
+      max-width:1300px;
+      margin:auto;
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding:18px 20px;
+    }
+
+    .logo{
+      font-size:1.8rem;
+      font-weight:700;
+      background:linear-gradient(90deg,#38bdf8,#818cf8);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .nav-links{
+      display:flex;
+      gap:25px;
+    }
+
+    .nav-links a{
+      text-decoration:none;
+      color:white;
+      transition:0.3s;
+      font-weight:500;
+    }
+
+    .nav-links a:hover{
+      color:#38bdf8;
+    }
+
+    .cart-icon{
+      position:relative;
+      font-size:1.4rem;
+      cursor:pointer;
+    }
+
+    .cart-count{
+      position:absolute;
+      top:-8px;
+      right:-10px;
+      background:#ef4444;
+      color:white;
+      width:20px;
+      height:20px;
+      border-radius:50%;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      font-size:0.8rem;
+    }
+
+    /* =========================
+       HERO
+    ========================== */
+
+    .hero{
+      min-height:80vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      text-align:center;
+      padding:40px 20px;
+      background:
+      linear-gradient(rgba(15,23,42,0.8),
+      rgba(15,23,42,0.9)),
+      url('https://images.unsplash.com/photo-1523275335684-37898b6baf30?q=80&w=1600&auto=format&fit=crop')
+      center/cover;
+    }
+
+    .hero-content h1{
+      font-size:4rem;
+      margin-bottom:20px;
+      line-height:1.2;
+    }
+
+    .hero-content span{
+      background:linear-gradient(90deg,#38bdf8,#818cf8);
+      -webkit-background-clip:text;
+      -webkit-text-fill-color:transparent;
+    }
+
+    .hero-content p{
+      color:#cbd5e1;
+      max-width:700px;
+      margin:auto;
+      margin-bottom:30px;
+      font-size:1.1rem;
+    }
+
+    .hero-btn{
+      padding:16px 30px;
+      border:none;
+      border-radius:14px;
+      background:linear-gradient(135deg,#06b6d4,#6366f1);
+      color:white;
+      font-size:1rem;
+      font-weight:600;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .hero-btn:hover{
+      transform:translateY(-3px);
+    }
+
+    /* =========================
+       FILTERS
+    ========================== */
+
+    .filters{
+      max-width:1300px;
+      margin:50px auto 20px;
+      padding:0 20px;
+      display:flex;
+      gap:15px;
+      flex-wrap:wrap;
+      justify-content:center;
+    }
+
+    .filter-btn{
+      padding:12px 20px;
+      border:none;
+      border-radius:12px;
+      background:#1e293b;
+      color:white;
+      cursor:pointer;
+      transition:0.3s;
+    }
+
+    .filter-btn.active,
+    .filter-btn:hover{
+      background:linear-gradient(135deg,#06b6d4,#6366f1);
+    }
+
+    /* =========================
+       SEARCH
+    ========================== */
+
+    .search-box{
+      max-width:500px;
+      margin:20px auto 50px;
+      padding:0 20px;
+    }
+
+    .search-box input{
+      width:100%;
+      padding:16px;
+      border:none;
+      outline:none;
+      border-radius:14px;
+      background:#1e293b;
+      color:white;
+      font-size:1rem;
+    }
+
+    .search-box input::placeholder{
+      color:#94a3b8;
+    }
+
+    /* =========================
+       PRODUCTS
+    ========================== */
+
+    .products{
+      max-width:1300px;
+      margin:auto;
+      padding:20px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:30px;
+    }
+
+    .product-card{
+      background:#1e293b;
+      border-radius:24px;
+      overflow:hidden;
+      transition:0.4s;
+      position:relative;
+      animation:fadeIn 0.5s ease;
+    }
+
+    .product-card:hover{
+      transform:translateY(-8px);
+      box-shadow:0 15px 40px rgba(0,0,0,0.4);
+    }
+
+    .product-image{
+      height:250px;
+      overflow:hidden;
+    }
+
+    .product-image img{
+      width:100%;
+      height:100%;
+      object-fit:cover;
+      transition:0.5s;
+    }
+
+    .product-card:hover img{
+      transform:scale(1.08);
+    }
+
+    .product-content{
+      padding:22px;
+    }
+
+    .product-content h3{
+      margin-bottom:10px;
+      font-size:1.3rem;
+    }
+
+    .product-content p{
+      color:#cbd5e1;
+      font-size:0.95rem;
+      margin-bottom:15px;
+    }
+
+    .price{
+      font-size:1.5rem;
+      font-weight:700;
+      color:#38bdf8;
+      margin-bottom:18px;
+    }
+
+    .product-buttons{
+      display:flex;
+      gap:12px;
+    }
+
+    .btn{
+      flex:1;
+      padding:12px;
+      border:none;
+      border-radius:12px;
+      cursor:pointer;
+      font-weight:600;
+      transition:0.3s;
+    }
+
+    .buy-btn{
+      background:linear-gradient(135deg,#06b6d4,#6366f1);
+      color:white;
+    }
+
+    .cart-btn{
+      background:#334155;
+      color:white;
+    }
+
+    .btn:hover{
+      opacity:0.9;
+      transform:translateY(-2px);
+    }
+
+    /* =========================
+       FEATURES
+    ========================== */
+
+    .features{
+      max-width:1200px;
+      margin:90px auto;
+      padding:20px;
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(250px,1fr));
+      gap:25px;
+    }
+
+    .feature-box{
+      background:#1e293b;
+      border-radius:24px;
+      padding:30px;
+      text-align:center;
+      transition:0.3s;
+    }
+
+    .feature-box:hover{
+      transform:translateY(-5px);
+    }
+
+    .feature-box i{
+      font-size:2.5rem;
+      margin-bottom:20px;
+      color:#38bdf8;
+    }
+
+    .feature-box h3{
+      margin-bottom:12px;
+    }
+
+    .feature-box p{
+      color:#cbd5e1;
+      font-size:0.95rem;
+    }
+
+    /* =========================
+       FOOTER
+    ========================== */
+
+    footer{
+      background:#020617;
+      padding:35px 20px;
+      text-align:center;
+      color:#94a3b8;
+      margin-top:60px;
+    }
+
+    /* =========================
+       ANIMATION
+    ========================== */
+
+    @keyframes fadeIn{
+      from{
+        opacity:0;
+        transform:translateY(20px);
+      }
+      to{
+        opacity:1;
+        transform:translateY(0);
+      }
+    }
+
+    /* =========================
+       MOBILE
+    ========================== */
+
+    @media(max-width:768px){
+
+      .hero-content h1{
+        font-size:2.5rem;
+      }
+
+      .nav-links{
+        display:none;
+      }
+
+    }
+
+  </style>
+</head>
+
+<body>
+
+  <!-- =========================
+       NAVBAR
+  ========================== -->
+
+  <nav>
+
+    <div class="nav-container">
+
+      <div class="logo">
+        ShopSphere
+      </div>
+
+      <div class="nav-links">
+        <a href="#">Home</a>
+        <a href="#products">Products</a>
+        <a href="#features">Features</a>
+        <a href="#">Contact</a>
+      </div>
+
+      <div class="cart-icon">
+        <i class="fa-solid fa-cart-shopping"></i>
+        <div class="cart-count" id="cartCount">
+          0
+        </div>
+      </div>
+
+    </div>
+
+  </nav>
+
+  <!-- =========================
+       HERO
+  ========================== -->
+
+  <section class="hero">
+
+    <div class="hero-content">
+
+      <h1>
+        Modern <span>E-Commerce</span> Experience
+      </h1>
+
+      <p>
+        A production-ready product catalog built using
+        modern JavaScript architecture, responsive design,
+        client-side routing concepts, and optimized UI.
+      </p>
+
+      <button class="hero-btn"
+      onclick="document.getElementById('products').scrollIntoView()">
+        Explore Products
+      </button>
+
+    </div>
+
+  </section>
+
+  <!-- =========================
+       FILTER BUTTONS
+  ========================== -->
+
+  <div class="filters">
+
+    <button class="filter-btn active"
+    data-category="all">
+      All
+    </button>
+
+    <button class="filter-btn"
+    data-category="electronics">
+      Electronics
+    </button>
+
+    <button class="filter-btn"
+    data-category="fashion">
+      Fashion
+    </button>
+
+    <button class="filter-btn"
+    data-category="gaming">
+      Gaming
+    </button>
+
+  </div>
+
+  <!-- SEARCH -->
+
+  <div class="search-box">
+
+    <input
+    type="text"
+    id="searchInput"
+    placeholder="Search products...">
+
+  </div>
+
+  <!-- =========================
+       PRODUCTS
+  ========================== -->
+
+  <section class="products"
+  id="products">
+
+  </section>
+
+  <!-- =========================
+       FEATURES
+  ========================== -->
+
+  <section class="features"
+  id="features">
+
+    <div class="feature-box">
+      <i class="fa-solid fa-truck-fast"></i>
+      <h3>Fast Delivery</h3>
+      <p>
+        Optimized shopping experience with
+        lightning-fast performance.
+      </p>
+    </div>
+
+    <div class="feature-box">
+      <i class="fa-solid fa-shield-halved"></i>
+      <h3>Secure Payments</h3>
+      <p>
+        Professional-grade architecture with
+        secure checkout simulation.
+      </p>
+    </div>
+
+    <div class="feature-box">
+      <i class="fa-solid fa-mobile-screen"></i>
+      <h3>Responsive Design</h3>
+      <p>
+        Fully responsive across desktop,
+        tablet, and mobile devices.
+      </p>
+    </div>
+
+  </section>
+
+  <!-- FOOTER -->
+
+  <footer>
+
+    © 2026 ShopSphere |
+    Full-Stack Deployment & Project Architecture
+
+  </footer>
+
+<script>
+
+  // =========================
+  // PRODUCT DATA
+  // =========================
+
+  const products = [
+
+    {
+      id:1,
+      name:"Wireless Headphones",
+      category:"electronics",
+      price:149,
+      image:"https://images.unsplash.com/photo-1505740420928-5e560c06d30e?q=80&w=1200&auto=format&fit=crop",
+      description:"Premium wireless sound experience."
+    },
+
+    {
+      id:2,
+      name:"Gaming Keyboard",
+      category:"gaming",
+      price:89,
+      image:"https://images.unsplash.com/photo-1511467687858-23d96c32e4ae?q=80&w=1200&auto=format&fit=crop",
+      description:"Mechanical RGB gaming keyboard."
+    },
+
+    {
+      id:3,
+      name:"Smart Watch",
+      category:"electronics",
+      price:199,
+      image:"https://images.unsplash.com/photo-1546868871-7041f2a55e12?q=80&w=1200&auto=format&fit=crop",
+      description:"Track fitness and notifications."
+    },
+
+    {
+      id:4,
+      name:"Fashion Hoodie",
+      category:"fashion",
+      price:59,
+      image:"https://images.unsplash.com/photo-1521572163474-6864f9cf17ab?q=80&w=1200&auto=format&fit=crop",
+      description:"Comfortable and stylish hoodie."
+    },
+
+    {
+      id:5,
+      name:"Gaming Mouse",
+      category:"gaming",
+      price:49,
+      image:"https://images.unsplash.com/photo-1527814050087-3793815479db?q=80&w=1200&auto=format&fit=crop",
+      description:"High precision gaming mouse."
+    },
+
+    {
+      id:6,
+      name:"Sneakers",
+      category:"fashion",
+      price:120,
+      image:"https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=1200&auto=format&fit=crop",
+      description:"Modern casual sneakers."
+    }
+
+  ];
+
+  // =========================
+  // DOM ELEMENTS
+  // =========================
+
+  const productsContainer =
+  document.getElementById("products");
+
+  const filterButtons =
+  document.querySelectorAll(".filter-btn");
+
+  const searchInput =
+  document.getElementById("searchInput");
+
+  const cartCount =
+  document.getElementById("cartCount");
+
+  let currentCategory = "all";
+
+  let cart = 0;
+
+  // =========================
+  // RENDER PRODUCTS
+  // =========================
+
+  function renderProducts(){
+
+    productsContainer.innerHTML = "";
+
+    const searchValue =
+    searchInput.value.toLowerCase();
+
+    const filteredProducts =
+    products.filter(product => {
+
+      const matchCategory =
+      currentCategory === "all" ||
+      product.category === currentCategory;
+
+      const matchSearch =
+      product.name.toLowerCase()
+      .includes(searchValue);
+
+      return matchCategory && matchSearch;
+
+    });
+
+    if(filteredProducts.length === 0){
+
+      productsContainer.innerHTML = `
+        <h2>No Products Found</h2>
+      `;
+
+      return;
+    }
+
+    filteredProducts.forEach(product => {
+
+      const productCard =
+      document.createElement("div");
+
+      productCard.classList.add("product-card");
+
+      productCard.innerHTML = `
+
+        <div class="product-image">
+
+          <img src="${product.image}"
+          alt="${product.name}">
+
+        </div>
+
+        <div class="product-content">
+
+          <h3>${product.name}</h3>
+
+          <p>${product.description}</p>
+
+          <div class="price">
+            $${product.price}
+          </div>
+
+          <div class="product-buttons">
+
+            <button class="btn buy-btn">
+              Buy Now
+            </button>
+
+            <button class="btn cart-btn"
+            onclick="addToCart()">
+              Add Cart
+            </button>
+
+          </div>
+
+        </div>
+
+      `;
+
+      productsContainer.appendChild(productCard);
+
+    });
+
+  }
+
+  // =========================
+  // FILTER BUTTONS
+  // =========================
+
+  filterButtons.forEach(button => {
+
+    button.addEventListener("click", () => {
+
+      filterButtons.forEach(btn =>
+        btn.classList.remove("active")
+      );
+
+      button.classList.add("active");
+
+      currentCategory =
+      button.dataset.category;
+
+      renderProducts();
+
+    });
+
+  });
+
+  // =========================
+  // SEARCH FUNCTIONALITY
+  // =========================
+
+  searchInput.addEventListener("input",
+  renderProducts);
+
+  // =========================
+  // CART FUNCTION
+  // =========================
+
+  function addToCart(){
+
+    cart++;
+
+    cartCount.textContent = cart;
+
+  }
+
+  // =========================
+  // INITIAL RENDER
+  // =========================
+
+  renderProducts();
+
+</script>
+
+</body>
+</html>
