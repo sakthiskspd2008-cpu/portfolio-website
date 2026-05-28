@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sakthi Sri | Advanced Portfolio</title>
+
+<style>
+/* ================= ROOT VARIABLES ================= */
+:root {
+  --primary: #38bdf8;
+  --bg: #ffffff;
+  --text: #111827;
+  --card: #f1f5f9;
+}
+
+/* DARK MODE */
+body.dark {
+  --bg: #0f172a;
+  --text: #f8fafc;
+  --card: #1e293b;
+}
+
+/* ================= GLOBAL ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  transition: 0.3s;
+}
+
+/* ================= GRID LAYOUT ================= */
+.container {
+  display: grid;
+  grid-template-areas:
+    "header"
+    "main"
+    "footer";
+}
+
+/* ================= HEADER ================= */
+header {
+  grid-area: header;
+  background: var(--primary);
+  color: white;
+  padding: 1rem 2rem;
+}
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+nav a {
+  color: white;
+  font-weight: bold;
+}
+
+/* ================= MAIN ================= */
+main {
+  grid-area: main;
+  padding: 2rem;
+}
+
+/* FLEXBOX USED */
+.section {
+  margin-bottom: 2rem;
+}
+
+.card-container {
+  display: flex;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.card {
+  background: var(--card);
+  padding: 1rem;
+  border-radius: 10px;
+  flex: 1 1 250px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: scale(1.05);
+}
+
+/* ================= BUTTON ================= */
+button {
+  padding: 0.6rem 1rem;
+  border: none;
+  background: black;
+  color: white;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+/* ================= FOOTER ================= */
+footer {
+  grid-area: footer;
+  text-align: center;
+  padding: 1rem;
+  background: #111;
+  color: white;
+}
+
+/* ================= RESPONSIVE ================= */
+@media (max-width: 768px) {
+  nav ul {
+    flex-direction: column;
+  }
+
+  .card-container {
+    flex-direction: column;
+  }
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="container">
+
+<!-- HEADER -->
+<header>
+  <nav>
+    <h1>Sakthi Sri</h1>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <button onclick="toggleTheme()">🌙</button>
+  </nav>
+</header>
+
+<!-- MAIN -->
+<main>
+
+<section id="about" class="section">
+  <h2>About Me</h2>
+  <p>I am a Computer Science student passionate about web development and building accessible applications.</p>
+</section>
+
+<section id="projects" class="section">
+  <h2>Projects</h2>
+  <div class="card-container">
+
+    <div class="card">
+      <h3>Portfolio Website</h3>
+      <p>Advanced responsive portfolio using HTML & CSS.</p>
+    </div>
+
+    <div class="card">
+      <h3>Java Project</h3>
+      <p>OOP-based console application.</p>
+    </div>
+
+  </div>
+</section>
+
+<section id="contact" class="section">
+  <h2>Contact</h2>
+  <form>
+    <input type="text" placeholder="Name" required><br><br>
+    <input type="email" placeholder="Email" required><br><br>
+    <textarea placeholder="Message" required></textarea><br><br>
+    <button type="submit">Send</button>
+  </form>
+</section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Sakthi Sri</p>
+</footer>
+
+</div>
+
+<script>
+function toggleTheme() {
+  document.body.classList.toggle("dark");
+}
+</script>
+
+</body>
+</html>
